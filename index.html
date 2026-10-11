@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>html{color-scheme:light}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>이지원 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: pale-sky hero with an About Me profile card, then one reading column; each case = 4-stop route (문제 → 근거 → 실행 → 달라진 것) beside a uniform image grid */
+:root {
+  --bg: #f4f8fb;
+  --paper: #ffffff;
+  --ink: #0e2131;
+  --muted: #536879;
+  --line: #d9e5ee;
+  --sky: #e2f1fa;
+  --tile: #eaf3f9;
+  --navy: #0c2c47;
+  --navy-ink: #e8f3fa;
+  --navy-muted: #8fb0c7;
+  --aqua: #16b3c7;
+  --accent: #0a7c92;
+  --blue: #2a6fdb;
+  --f-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --wrap: 1080px;
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1520; --paper: #0f1f2d; --ink: #e5f0f7; --muted: #92a9bb; --line: #1d3445;
+    --sky: #0e2232; --tile: #132a3b; --navy: #06121c; --navy-ink: #e5f0f7; --navy-muted: #7f9db3;
+    --aqua: #3fd2e3; --accent: #5fd9e8; --blue: #7aa9ff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1520; --paper: #0f1f2d; --ink: #e5f0f7; --muted: #92a9bb; --line: #1d3445;
+  --sky: #0e2232; --tile: #132a3b; --navy: #06121c; --navy-ink: #e5f0f7; --navy-muted: #7f9db3;
+  --aqua: #3fd2e3; --accent: #5fd9e8; --blue: #7aa9ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body);
+  font-size: 17px; line-height: 1.78; word-break: keep-all; overflow-wrap: break-word;
+}
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { text-wrap: balance; letter-spacing: -0.025em; line-height: 1.32; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--aqua); outline-offset: 3px; border-radius: 4px; }
+.eyebrow {
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600;
+}
+
+/* ---------- progress + nav ---------- */
+.progress { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; height: 3px; width: 100%; z-index: 30;
+  background: linear-gradient(90deg, var(--aqua), var(--blue)); transform-origin: 0 50%; transform: scaleX(0); }
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+nav.top .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+nav.top .who { font-weight: 700; font-size: 15px; white-space: nowrap; display: flex; align-items: center; gap: 10px; }
+nav.top .who i { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--aqua);
+  display: grid; place-items: center; font: 600 11px var(--f-mono); font-style: normal; }
+nav.top ul { display: flex; gap: 4px; list-style: none; margin: 0 0 0 auto; padding: 0; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+nav.top ul::-webkit-scrollbar { display: none; }
+nav.top a { display: block; text-decoration: none; font-size: 14px; color: var(--muted); white-space: nowrap;
+  padding: 6px 12px; border-radius: 999px; transition: background .25s, color .25s; }
+nav.top a:hover { color: var(--ink); background: var(--tile); }
+nav.top a.on { color: var(--navy-ink); background: var(--navy); }
+
+/* ---------- hero ---------- */
+.hero { background: var(--sky); padding-block: 64px 56px; position: relative; overflow: hidden; }
+.hero::before { /* faint flight-path arc */
+  content: ""; position: absolute; right: -120px; top: -160px; width: 560px; height: 560px; border-radius: 50%;
+  border: 2px dashed color-mix(in srgb, var(--aqua) 45%, transparent); pointer-events: none;
+}
+.hero .grid { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 48px; align-items: end; position: relative; }
+.hero h1 { font-size: clamp(30px, 4.6vw, 50px); font-weight: 700; margin-top: 14px; color: var(--ink); }
+.hero h1 em { font-style: normal; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--aqua) 38%, transparent) 62%); }
+.hero .lede { margin-top: 20px; color: var(--muted); max-width: 58ch; font-size: 18px; }
+.hero .photo { width: 210px; max-width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 14px;
+  box-shadow: 0 20px 40px -18px rgba(12,44,71,.45); }
+.contact-row { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+.contact-row span, .contact-row a, .contact-row button {
+  font: 500 14px var(--f-body); color: var(--ink); background: var(--paper); border: 1px solid var(--line);
+  border-radius: 999px; padding: 6px 14px; text-decoration: none; cursor: default;
+}
+.contact-row a, .contact-row button { cursor: pointer; transition: border-color .2s, transform .2s; }
+.contact-row a:hover, .contact-row button:hover { border-color: var(--aqua); transform: translateY(-1px); }
+
+.hello { font-size: clamp(20px, 2.4vw, 26px); font-weight: 500; color: var(--muted); }
+.hello b { color: var(--accent); font-weight: 700; }
+.about { margin-top: 44px; display: grid; grid-template-columns: 1fr 1.35fr 1fr 1fr; background: var(--paper);
+  border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 50px -36px rgba(12,44,71,.45); position: relative; }
+.about-cell { padding: 24px 22px; display: grid; gap: 4px; align-content: start; min-width: 0; border-left: 1px solid var(--line); font-size: 15px; }
+.about-cell:first-child { border-left: 0; }
+.about-cell h2 { font: 600 12px var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.about-cell .big { font-size: 18px; font-weight: 700; }
+.about-cell .sub { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+.tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.tl li { position: relative; padding-left: 16px; line-height: 1.5; }
+.tl li::before { content: ""; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--aqua); }
+.tl li span { display: block; color: var(--muted); font: 500 12.5px var(--f-mono); margin-top: 2px; }
+
+/* ---------- sections ---------- */
+section { padding-block: 88px 8px; }
+.sec-head { display: grid; gap: 10px; margin-bottom: 36px; max-width: 64ch; }
+.sec-head h2 { font-size: clamp(25px, 3.2vw, 34px); font-weight: 700; }
+.sec-head p { color: var(--muted); }
+
+/* talent cards */
+.fit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.fit article { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px;
+  display: grid; gap: 10px; align-content: start; transition: transform .3s var(--ease), box-shadow .3s, border-color .3s; }
+.fit article:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -20px rgba(12,44,71,.35); border-color: color-mix(in srgb, var(--aqua) 50%, var(--line)); }
+.fit .n { font: 600 12px var(--f-mono); color: var(--accent); letter-spacing: .1em; }
+.fit h3 { font-size: 19px; }
+.fit .q { color: var(--muted); font-size: 15px; }
+.fit p { font-size: 15.5px; }
+.fit .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.fit .links a { font-size: 13.5px; font-weight: 600; text-decoration: none; color: var(--accent);
+  background: var(--tile); border-radius: 999px; padding: 4px 12px; transition: background .2s, color .2s; }
+.fit .links a:hover { background: var(--aqua); color: var(--navy); }
+
+/* case */
+.case { padding-block: 48px; border-top: 1px solid var(--line); }
+.case:first-of-type { border-top: 0; padding-top: 0; }
+.case-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.tag { font: 600 12px var(--f-mono); letter-spacing: .08em; background: var(--navy); color: var(--aqua);
+  padding: 4px 10px; border-radius: 6px; }
+.case-meta .where { font-size: 14.5px; color: var(--muted); }
+.case h3 { font-size: clamp(22px, 2.6vw, 28px); font-weight: 700; margin-top: 14px; }
+.result { margin-top: 16px; display: inline-flex; gap: 10px; align-items: flex-start; background: var(--tile);
+  border-radius: 10px; padding: 10px 16px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.result::before { content: "→"; color: var(--accent); font-family: var(--f-mono); }
+.case-body { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 44px; margin-top: 28px; align-items: start; }
+.case-body.noimg { grid-template-columns: minmax(0, 1fr); }
+.case-body.noimg .route { max-width: 760px; }
+
+/* route */
+.route { list-style: none; margin: 0; padding: 0; }
+.route li { position: relative; padding: 0 0 26px 40px; }
+.route li:last-child { padding-bottom: 0; }
+.route li::before {
+  content: ""; position: absolute; left: 6px; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--bg); border: 3px solid var(--blue); z-index: 1;
+}
+.route li::after {
+  content: ""; position: absolute; left: 13px; top: 26px; bottom: 2px; width: 2px;
+  background: linear-gradient(var(--blue), var(--aqua)); transform-origin: top;
+}
+.route li:last-child::after { display: none; }
+.route li.end::before { background: var(--aqua); border-color: var(--aqua); box-shadow: 0 0 0 6px color-mix(in srgb, var(--aqua) 22%, transparent); }
+.stop { display: inline-block; font: 600 12px var(--f-mono); letter-spacing: .08em; color: var(--blue);
+  background: color-mix(in srgb, var(--blue) 10%, transparent); padding: 2px 9px; border-radius: 999px; }
+.route li.end .stop { color: var(--accent); background: color-mix(in srgb, var(--aqua) 16%, transparent); }
+.route p { margin-top: 6px; max-width: 62ch; }
+.route li.end p { font-weight: 600; }
+
+/* uniform image grid */
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.gallery.one { grid-template-columns: minmax(0, 1fr); }
+.tile { position: relative; margin: 0; aspect-ratio: 4 / 5; border-radius: 12px; overflow: hidden; background: var(--tile);
+  cursor: zoom-in; border: 0; padding: 0; display: block; width: 100%; }
+.gallery.one .tile { aspect-ratio: 4 / 3; }
+.tile img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s var(--ease); }
+.tile.mock img { object-fit: contain; padding: 14px; }
+.tile:hover img { transform: scale(1.04); }
+.tile::after { content: "＋"; position: absolute; right: 10px; bottom: 10px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--navy); color: var(--aqua); display: grid; place-items: center; font-size: 15px;
+  opacity: 0; transform: translateY(4px); transition: opacity .25s, transform .25s; }
+.tile:hover::after, .tile:focus-visible::after { opacity: 1; transform: none; }
+.cap { grid-column: 1 / -1; font-size: 13.5px; color: var(--muted); margin-top: 2px; }
+
+/* work */
+.job { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 28px; padding-block: 32px; border-top: 1px solid var(--line); }
+.job:first-child { border-top: 0; padding-top: 0; }
+.job .when { font: 500 14px var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 4px; }
+.job h3 { font-size: 21px; font-weight: 700; }
+.job .role { color: var(--muted); font-size: 15.5px; margin-top: 2px; }
+.job ul { margin: 14px 0 0; padding-left: 20px; max-width: 70ch; }
+.job li { margin-top: 6px; }
+.job li::marker { color: var(--aqua); }
+.phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; counter-reset: ph; }
+.phase { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 16px; font-size: 15px; }
+.phase b { font: 600 12px var(--f-mono); letter-spacing: .1em; display: block; margin-bottom: 6px; color: var(--blue); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.chip { font: 500 12.5px var(--f-mono); border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: 3px 11px; color: var(--muted); }
+
+/* more */
+.more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.more article { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr; transition: transform .3s var(--ease), box-shadow .3s; }
+.more article:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -22px rgba(12,44,71,.4); }
+.more .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); }
+.more .pics.one { grid-template-columns: 1fr; }
+.more .tile { aspect-ratio: 4 / 3; border-radius: 0; }
+.more .pics.one .tile { aspect-ratio: 8 / 3; }
+.more .pics.one .tile.mock img { object-position: top; object-fit: cover; padding: 0; }
+.more .txt { padding: 18px 20px 20px; display: grid; gap: 8px; align-content: start; }
+.more h3 { font-size: 18px; font-weight: 700; }
+.more .where { font-size: 13.5px; color: var(--muted); }
+.more p { font-size: 15.5px; }
+.more .award { font-size: 14px; font-weight: 600; color: var(--accent); margin-top: 4px; }
+
+/* next problem ticket */
+.ticket { display: grid; grid-template-columns: minmax(0, 1fr); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+.ticket .main { padding: 32px; display: grid; gap: 16px; }
+.ticket h3 { font-size: clamp(20px, 2.3vw, 24px); font-weight: 700; }
+.ticket .main p { max-width: 72ch; }
+.ticket .plan { list-style: none; padding: 18px 20px; margin: 4px 0 0; display: grid; gap: 10px; counter-reset: s;
+  background: var(--tile); border-radius: 12px; }
+.ticket .plan li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 6px; }
+.ticket .plan li::before { content: counter(s, decimal-leading-zero); font: 600 14px var(--f-mono); color: var(--accent); padding-top: 3px; }
+.ticket .stub { background: var(--navy); color: var(--navy-ink); padding: 32px 24px; position: relative; }
+.ticket .stub::before { content: ""; position: absolute; left: -1px; top: 18px; bottom: 18px; border-left: 2px dashed color-mix(in srgb, var(--aqua) 55%, transparent); }
+.ticket .stub dl { margin: 0; display: grid; gap: 18px; }
+.ticket .stub dt { font: 600 12px var(--f-body); letter-spacing: .02em; color: var(--navy-muted); }
+.ticket .stub dd { margin: 3px 0 0; font-weight: 600; }
+.ticket .stub .route-mini { font: 600 22px var(--f-mono); color: var(--aqua); letter-spacing: .04em; }
+
+/* basics */
+.basics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.basics > div { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; min-width: 0; }
+.basics h3 { font: 600 12px var(--f-mono); letter-spacing: .12em; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+.basics ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 15.5px; }
+.basics .sub { color: var(--muted); font-size: 14px; }
+
+.closing { background: var(--navy); color: var(--navy-ink); padding-block: 96px 88px; margin-top: 88px; position: relative; overflow: hidden; }
+.closing::before { content: ""; position: absolute; left: -140px; bottom: -220px; width: 520px; height: 520px; border-radius: 50%; border: 2px dashed color-mix(in srgb, var(--aqua) 40%, transparent); pointer-events: none; }
+.closing .wrap { position: relative; display: grid; gap: 22px; }
+.closing-eyebrow { font: 600 13px var(--f-mono); letter-spacing: .24em; color: var(--aqua); }
+.closing h2 { font-size: clamp(24px, 3.4vw, 38px); font-weight: 700; line-height: 1.4; max-width: 30ch; }
+.closing-text { color: var(--navy-muted); font-size: 17px; }
+.closing-contact { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-top: 12px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.12); }
+.closing-contact div { display: grid; gap: 4px; }
+.closing-contact span { font: 600 11px var(--f-mono); letter-spacing: .16em; color: var(--navy-muted); }
+.closing-contact b, .closing-contact a { font-weight: 600; color: var(--navy-ink); text-decoration: none; font-size: 16px; }
+.closing-contact a:hover { color: var(--aqua); }
+footer { padding-block: 28px; color: var(--muted); font-size: 13px; text-align: center; }
+
+.totop { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 25;
+  width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--navy); color: var(--aqua);
+  font-size: 18px; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(12,44,71,.6);
+  opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .3s, transform .3s; }
+.totop.show { opacity: 1; transform: none; pointer-events: auto; }
+
+/* lightbox */
+dialog.lb { border: 0; padding: 0; background: transparent; width: min(94vw, 1040px); max-width: none; max-height: 96vh; overflow: visible; color: #e5f0f7; }
+dialog.lb::backdrop { background: rgba(6, 18, 28, .88); backdrop-filter: blur(4px); }
+.lb-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 15px; }
+.lb-top b { font-weight: 700; }
+.lb-top span { font: 500 13px var(--f-mono); color: #8fb0c7; }
+#lbClose { margin-left: auto; width: 38px; height: 38px; border-radius: 50%; border: 0; background: #e5f0f7; color: #0c2c47; font-size: 17px; cursor: pointer; }
+.lb-stage { position: relative; display: grid; place-items: center; height: min(68vh, 700px); background: rgba(255,255,255,.04); border-radius: 12px; touch-action: pan-y; }
+.lb-stage img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 8px; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; border: 0;
+  background: rgba(229,240,247,.92); color: #0c2c47; font-size: 28px; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: transform .2s; }
+.lb-nav:hover { transform: translateY(-50%) scale(1.08); }
+.lb-nav.prev { left: 10px; }
+.lb-nav.next { right: 10px; }
+.lb-nav[hidden] { display: none !important; }
+#lbCap { text-align: center; font-size: 14px; margin-top: 10px; color: #c9dbe7; min-height: 1.4em; }
+.lb-thumbs { display: flex; gap: 8px; justify-content: center; margin-top: 10px; overflow-x: auto; padding: 4px; }
+.lb-thumbs:empty { display: none; }
+.lb-thumbs button { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 8px; overflow: hidden; border: 2px solid transparent; padding: 0; background: rgba(255,255,255,.06); cursor: pointer; opacity: .55; transition: opacity .2s, border-color .2s; }
+.lb-thumbs button img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lb-thumbs button.on, .lb-thumbs button:hover { opacity: 1; border-color: var(--aqua); }
+dialog.lb[open] .lb-stage img { animation: pop .3s var(--ease); }
+.count { position: absolute; left: 10px; bottom: 10px; font: 600 12px var(--f-mono); color: var(--navy-ink); background: var(--navy);
+  padding: 3px 9px; border-radius: 999px; pointer-events: none; }
+
+
+/* travel sheet */
+a.inline { color: var(--accent); font-weight: 600; text-decoration: none; white-space: nowrap; }
+a.inline:hover { text-decoration: underline; }
+.sheet { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px -38px rgba(12,44,71,.5); }
+.sheet-bar { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--tile); border-bottom: 1px solid var(--line); font-size: 14px; flex-wrap: wrap; }
+.sheet-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.sheet-bar b { margin-left: 6px; font-weight: 600; }
+.sheet-note { margin-left: auto; font: 500 12px var(--f-mono); color: var(--muted); }
+.sheet-body { padding: 16px; }
+.sheet-split { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.xl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; }
+.xl table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.xl th, .xl td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; white-space: nowrap; }
+.xl thead th { background: color-mix(in srgb, var(--blue) 12%, var(--paper)); font-weight: 600; font-size: 12.5px; }
+.xl thead th.hl { background: color-mix(in srgb, var(--aqua) 22%, var(--paper)); text-align: center; }
+.xl tbody th { font: 500 12.5px var(--f-mono); color: var(--muted); background: var(--tile); width: 64px; }
+.xl td.chk { text-align: center; font-weight: 700; color: var(--accent); width: 34px; }
+.xl td:empty::after { content: "\00a0"; }
+.xl table.pay th { background: var(--tile); font: 500 12.5px var(--f-mono); color: var(--muted); }
+.xl table.pay tr.sum td, .xl table.pay tr.sum th { font-weight: 700; color: var(--ink); }
+.sheet-tip { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.sheet-tabs { display: flex; gap: 2px; padding: 0 12px; background: var(--tile); border-top: 1px solid var(--line); overflow-x: auto; }
+.sheet-tabs button { font: 500 13.5px var(--f-body); border: 0; background: transparent; color: var(--muted); padding: 10px 14px;
+  border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
+.sheet-tabs button:hover { color: var(--ink); }
+.sheet-tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--aqua); background: var(--paper); font-weight: 600; }
+.sheet-pane { animation: pop .3s var(--ease); }
+.trips { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.trips li { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.trips .when { font: 500 13.5px var(--f-mono); color: var(--muted); }
+.trips b { font-weight: 700; }
+.trips p { color: var(--muted); font-size: 15px; margin-top: 4px; max-width: 70ch; }
+.tag-s { font: 600 12px var(--f-mono); color: var(--accent); background: var(--tile); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+.trip-pics { display: grid; grid-template-columns: repeat(2, minmax(0, 180px)); gap: 8px; margin-top: 10px; }
+.trip-pics .tile { aspect-ratio: 4 / 3; border-radius: 10px; }
+.trip-pics .count { font-size: 11px; padding: 2px 7px; }
+.trips-more { margin-top: 14px; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) {
+  .sheet-split { grid-template-columns: minmax(0, 1fr); }
+  .trips li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .tag-s { justify-self: start; }
+}
+
+
+.found { margin-top: 40px; }
+.found h3 { font-size: clamp(19px, 2.2vw, 23px); font-weight: 700; margin-bottom: 18px; }
+.found-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.found-list li { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 6px; align-content: start;
+  transition: transform .3s var(--ease), box-shadow .3s, border-color .3s; }
+.found-list li:hover { transform: translateY(-3px); box-shadow: 0 16px 30px -22px rgba(12,44,71,.4); border-color: color-mix(in srgb, var(--aqua) 50%, var(--line)); }
+.found-list .when { font: 600 12px var(--f-mono); color: var(--accent); letter-spacing: .08em; }
+.found-list b { font-size: 16px; line-height: 1.45; }
+.found-list p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+.found-list .post { display: inline-block; margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+.found-list a.post:hover { text-decoration: underline; }
+.found-list .post.muted { color: var(--muted); font-weight: 500; }
+.found-note { margin-top: 12px; font-size: 13.5px; color: var(--muted); }
+
+
+.trait { font: 600 12px var(--f-body); color: var(--accent); background: var(--tile); border-radius: 999px; padding: 3px 10px; }
+.travel-head { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: center; margin-bottom: 8px; }
+.moin-result { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 8px; }
+.moin-result .big-num { font: 700 clamp(24px, 3vw, 32px) var(--f-body); color: var(--accent); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.travel-head .gallery .tile { aspect-ratio: 1 / 1; }
+@media (max-width: 760px) { .travel-head { grid-template-columns: minmax(0, 1fr); } }
+
+.ticket h4 { font-size: 15px; font-weight: 700; color: var(--accent); margin: 8px 0 -6px; letter-spacing: -0.01em; }
+.ticket-label { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: -8px; }
+/* ---------- print ---------- */
+.print-only { display: none; }
+@media print {
+  @page { size: 1200px 1697px; margin: 0; }
+  html { scroll-behavior: auto; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  nav.top, .progress, .totop, dialog, .sheet-tabs, .count, .tile::after { display: none !important; }
+  .reveal, .anim, .about, .about-cell, .hero .photo, .route li::after, .sheet-pane { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .hero { padding-block: 72px 56px; }
+  section { padding-block: 64px 8px; }
+  .case, .job, .more article, .found-list li, .trips li, .ticket, .sheet, .about, .travel-head, .appendix-group, .closing { break-inside: avoid; }
+  .sec-head { break-after: avoid; }
+  .print-only { display: block !important; }
+  a { text-decoration: none; }
+}
+.appendix h2 { font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+.appendix-group { margin-top: 36px; }
+.appendix-group h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--accent); }
+.appendix-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.appendix-grid figure { margin: 0; break-inside: avoid; }
+.appendix-grid img { width: 100%; display: block; border-radius: 8px; border: 1px solid var(--line); background: var(--tile); }
+.appendix-grid figcaption { font-size: 13px; color: var(--muted); margin-top: 6px; }
+/* ---------- end print ---------- */
+/* ---------- motion ---------- */
+@keyframes up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes flip { from { opacity: 0; transform: perspective(500px) rotateX(-70deg); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: .25; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero .anim { animation: up .7s var(--ease) both; }
+  .hero .anim:nth-child(2) { animation-delay: .08s; }
+  .hero .anim:nth-child(3) { animation-delay: .16s; }
+  .hero .anim:nth-child(4) { animation-delay: .24s; }
+  .hero .about.anim { animation-delay: .3s; }
+  .hero .photo { animation: pop .8s .2s var(--ease) both; }
+  .about { animation: up .8s .3s var(--ease) both; }
+  .about-cell { animation: up .6s var(--ease) both; }
+  .about-cell:nth-child(1) { animation-delay: .4s; }
+  .about-cell:nth-child(2) { animation-delay: .48s; }
+  .about-cell:nth-child(3) { animation-delay: .56s; }
+  .about-cell:nth-child(4) { animation-delay: .64s; }
+  @supports (animation-timeline: view()) {
+    .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+    .route li::after { animation: grow linear both; animation-timeline: view(); animation-range: entry 40% cover 45%; }
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .hero .grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .hero .photo { width: 120px; order: -1; border-radius: 12px; }
+  .about { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .about-cell:nth-child(3) { border-left: 0; }
+  .about-cell:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .case-body { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .case-body .gallery { max-width: 520px; }
+  .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .basics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .job { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .ticket { grid-template-columns: minmax(0, 1fr); }
+  .ticket .stub::before { left: 18px; right: 18px; top: -1px; bottom: auto; border-left: 0; border-top: 2px dashed color-mix(in srgb, var(--aqua) 55%, transparent); }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  nav.top .who span { display: none; }
+  .fit, .more, .basics, .phases { grid-template-columns: minmax(0, 1fr); }
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .about-cell, .about-cell:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+  .about-cell:first-child { border-top: 0; }
+  .ticket .main { padding: 22px; }
+  section { padding-block: 64px 8px; }
+}
+</style>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav class="top" aria-label="섹션 이동">
+  <div class="wrap">
+    <div class="who"><i>JL</i><span>이지원</span></div>
+    <ul id="navlist">
+      <li><a href="#cases">주요 프로젝트</a></li>
+      <li><a href="#work">실무 경력</a></li>
+      <li><a href="#travel">여행</a></li>
+      <li><a href="#more">그 밖의 프로젝트</a></li>
+      <li><a href="#next">입사 후 제안</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="hello anim">Hello, <b>이지원</b>입니다.</p>
+        <h1 class="anim">판매·운영 현장에서 놓치기 쉬운 문제를 찾아, <em>해결될 때까지 방법을 바꿉니다.</em></h1>
+        <p class="lede anim">의류산업학과 경영학을 함께 공부했고, 패션 브랜드 온라인몰 운영과 40개국 이상 글로벌 캠페인 페이지 운영을 거쳤습니다. 일하다 불편한 점이 보이면 왜 그런지 따져 보고 고쳐 왔습니다. 품절된 상품을 다시 만들어 모두 팔았고, 2~3일 걸리던 시험지 제작을 4시간으로 줄였습니다.</p>
+        <div class="contact-row anim">
+
+          <button type="button" id="copyMail" title="이메일 주소 복사">easywon0430@gmail.com</button>
+          <a href="https://www.linkedin.com/in/jiwon0430/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+      </div>
+      <img class="photo" src="img/photo.jpg" alt="이지원 증명사진">
+    </div>
+
+    <div class="about anim" aria-label="About Me">
+      <div class="about-cell">
+        <h2>Education</h2>
+        <p class="big">이화여자대학교</p>
+        <p>의류산업학과 · 경영학 복수전공</p>
+        <p class="sub">2020.03 – 2026.08 졸업 · GPA 4.22 / 4.5 · 우등 6개 학기</p>
+      </div>
+      <div class="about-cell">
+        <h2>Experience</h2>
+        <ul class="tl">
+          <li><b>PTKOREA</b> 글로벌 캠페인 이커머스 인턴<span>2026.05 – 재직 중</span></li>
+          <li><b>김종학프로덕션</b> 기획 PD 인턴<span>2025.10 – 12</span></li>
+          <li><b>리플레인</b> 이커머스 AMD 인턴<span>2023.10 – 2024.02</span></li>
+        </ul>
+      </div>
+      <div class="about-cell">
+        <h2>Global</h2>
+        <p class="big">독일 6개월 방문학생</p>
+        <p>Europa-Universität Viadrina</p>
+        <p class="sub">호주 멜버른 한 달 살기 · 유럽·아시아·호주·아프리카 여행 · TOEIC Speaking AL</p>
+      </div>
+      <div class="about-cell">
+        <h2>Toolkit</h2>
+        <p>Claude Code · Codex</p>
+        <p>Jira · CMS · Sabangnet · ECount · Cafe24</p>
+        <p class="sub">Excel · PowerPoint · Photoshop · Illustrator · SketchUp</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Cases</p>
+      <h2>문제를 끝까지 푼 경험</h2>
+      <p>처음 문제를 발견한 순간부터 결과가 나올 때까지 맡았던 일들입니다.</p>
+    </div>
+
+    <article class="case" id="case-stitch">
+      <div class="reveal">
+        <div class="case-meta"><span class="tag">CASE 1</span><span class="trait"># 정답 없이 판단하고 검증</span><span class="where">스티치부티크 · 교내 축제 핸드메이드 브랜드 · 5인 팀 팀장 · 2024.03–05</span></div>
+        <h3>품절을 판매 종료가 아니라 재생산 판단으로 바꿨습니다</h3>
+        <p class="result">데님 스크런치 약 100개 전량 판매 · 부스 전체 총매출 215만 원, 순이익 70만 원</p>
+      </div>
+      <div class="case-body">
+        <ol class="route">
+          <li class="reveal"><span class="stop">문제</span><p>축제 운영 2일차, 가장 반응이 좋던 데님 스크런치가 예상보다 빨리 품절됐습니다. 인기 상품이 빠지면 부스로 들어오는 손님과 다른 상품의 판매 기회까지 줄어드는 상황이었습니다.</p></li>
+          <li class="reveal"><span class="stop">근거</span><p>목표 매출 150만 원에서 원가를 역산해 판매가를 정했고, 판매 전 수요조사와 선주문으로 상품별 물량을 잡아 둔 상태였습니다. 이 기준에 추가 원단 비용과 남은 판매 시간을 대 보고, 재생산해도 남는다고 판단했습니다.</p></li>
+          <li class="reveal"><span class="stop">실행</span><p>팀원을 설득해 동대문에서 비슷한 데님 원단을 다시 소싱하고, 제작 공정을 난이도별로 나눠 약 30개를 추가 생산했습니다. 판매 흐름에 맞춰 진열과 할인 폭을 조정했고, 마감 직전에는 묶음 구성으로 남은 재고를 정리했습니다.</p></li>
+          <li class="end reveal"><span class="stop">달라진 것</span><p>처음 약 70개에 추가분을 더한 약 100개를 모두 팔았습니다. 부스 전체로 총매출 215만 원, 순이익 70만 원을 남겼습니다.</p></li>
+        </ol>
+        <div class="gallery reveal" data-title="스티치부티크" data-extra="img/stitch-logo.jpg|스티치부티크 로고;img/stitch-item-1.jpg|스티치부티크 상품 디자인 1;img/stitch-item-2.jpg|스티치부티크 상품 디자인 2;img/stitch-item-3.jpg|스티치부티크 상품 디자인 3;img/stitch-item-4.jpg|스티치부티크 홍보 카드">
+          <button class="tile" type="button"><img src="img/stitch-scrunchie.jpg" alt="만든 데님 스크런치"></button>
+          <button class="tile" type="button"><img src="img/stitch-basket.jpg" alt="파우치와 키링 세트 상품"></button>
+          <button class="tile mock" type="button"><img src="img/stitch-post1.webp" alt="데님 스티치 스크런치 판매 게시물"></button>
+          <button class="tile mock" type="button"><img src="img/stitch-post2.webp" alt="선주문 전용 세트 혜택 게시물"></button>
+          <p class="cap">위는 팀이 만든 상품, 아래는 인스타그램 판매와 선주문 안내 게시물</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" id="case-ai">
+      <div class="reveal">
+        <div class="case-meta"><span class="tag">CASE 2</span><span class="trait"># 시키지 않았지만 시작 · 빠르게 배움</span><span class="where">수신제학원 · 아르바이트 · 2026.03–05</span></div>
+        <h3>시험지 한 회 제작을 2~3일에서 4시간으로 줄였습니다</h3>
+        <p class="result">제작 시간 2~3일 → 4시간 · 학원 매뉴얼로 남겨 다른 근무자의 반복 작업도 줄임</p>
+      </div>
+      <div class="case-body noimg">
+        <ol class="route">
+          <li class="reveal"><span class="stop">문제</span><p>시험지 한 회를 만드는 데 2~3일이 걸렸습니다. 자료 분석, 문항 작성, 해석, 검수를 매번 사람이 처음부터 반복하는 구조였습니다.</p></li>
+          <li class="reveal"><span class="stop">근거</span><p>지시받은 일은 아니었습니다. 작업을 단계로 쪼개 보니 대부분이 같은 형식의 반복이었고, AI 도구로 단계별 초안을 만들고 사람은 검수에 집중하면 된다고 판단해 선생님께 먼저 제안했습니다.</p></li>
+          <li class="reveal"><span class="stop">실행</span><p>Claude Code와 Codex를 자료 분석, 문항 제작, 영어 해석, 검수 역할로 나눴습니다. 단계마다 검수 지점을 두어 앞 단계 오류가 뒤로 넘어가지 않게 했고, 한 도구의 결과를 다른 도구가 교차 확인하게 했습니다. 방향이 어긋나면 바로 멈추고 프롬프트와 참조 파일을 고쳤습니다.</p></li>
+          <li class="end reveal"><span class="stop">달라진 것</span><p>제작 시간이 4시간으로 줄었습니다. 이 과정을 학원 매뉴얼로 남겼고, 같은 방식으로 오답 기록·타이머·TTS 기능을 갖춘 영어 듣기 시험 웹사이트도 만들었습니다.</p></li>
+        </ol>
+      </div>
+    </article>
+
+    <article class="case" id="case-rtl">
+      <div class="reveal">
+        <div class="case-meta"><span class="tag">CASE 3</span><span class="trait"># 방법을 바꿔 끝까지</span><span class="where">PTKOREA · 글로벌 캠페인 이커머스 인턴 · 2026.05–07</span></div>
+        <h3>라이브 일정과 아랍어권 표시 품질을 함께 지켰습니다</h3>
+        <p class="result">라이브 전 오류 발견 · 우회안의 실제 반영까지 확인</p>
+      </div>
+      <div class="case-body">
+        <ol class="route">
+          <li class="reveal"><span class="stop">문제</span><p>하반기 플래그십 신제품 글로벌 런칭 중, 담당한 중동·북아프리카 사이트의 아랍어 페이지에서 폰트 깨짐과 오른쪽에서 왼쪽으로 읽는 RTL 카피 표시 오류를 라이브 전에 발견했습니다.</p></li>
+          <li class="reveal"><span class="stop">근거</span><p>아랍어 전용 폰트가 아닌 다른 폰트로 내보내면 현지 규격과 품질 기준을 맞출 수 없었습니다. 개발팀의 단기 수정도 어려워, 수정만 기다리면 라이브 일정이 밀릴 수 있었습니다.</p></li>
+          <li class="reveal"><span class="stop">실행</span><p>디자인팀과 협의해 CMS 에디터로 텍스트를 넣는 방식 대신 통이미지 에셋으로 전환하는 우회안을 제안했습니다. Jira로 인도 개발팀과 조율하고 개발콜에도 참여했습니다.</p></li>
+          <li class="end reveal"><span class="stop">달라진 것</span><p>우회안이 실제 페이지에 반영된 것을 다시 확인했고, 오류가 고객에게 노출되기 전에 막았습니다.</p></li>
+        </ol>
+        <div class="gallery reveal" data-title="PTKOREA · 아랍어 페이지">
+          <button class="tile mock" type="button"><img src="img/ptk-rtl.webp" alt="Shop App 아랍어(RTL) 화면과 영어 화면"></button>
+          <button class="tile mock" type="button"><img src="img/ptk-fold.webp" alt="Shop App 신제품 캠페인 화면"></button>
+          <p class="cap">Shop App 해외 버전. 아랍어 화면은 레이아웃 전체가 오른쪽에서 왼쪽으로 뒤집힙니다.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="case" id="case-band">
+      <div class="reveal">
+        <div class="case-meta"><span class="tag">CASE 4</span><span class="trait"># 시키지 않았지만 시작</span><span class="where">밴드 동아리 한소리 · 연출부장 · 2020.07–2022.06</span></div>
+        <h3>예산이 끊긴 동아리에 상점 스폰서십을 만들었습니다</h3>
+        <p class="result">학교 주변 상점 협찬 유치 · 신입 지원자 전년 대비 2배</p>
+      </div>
+      <div class="case-body">
+        <ol class="route">
+          <li class="reveal"><span class="stop">문제</span><p>코로나로 공연 예산이 끊겨, 활동을 이어가려면 약 100만 원의 대관비를 따로 마련해야 했습니다.</p></li>
+          <li class="reveal"><span class="stop">근거</span><p>부원 사비로 메우는 방식은 오래가지 못한다고 봤습니다. 반대로 학교 주변 상점은 학생에게 알릴 통로가 필요했습니다. 양쪽 필요가 맞는 지점이 있었습니다.</p></li>
+          <li class="reveal"><span class="stop">실행</span><p>포스터·팸플릿·SNS·유튜브에 상호와 할인 정보를 노출하는 대가로 대관비를 지원받는 구조를 만들었습니다. 상점을 찾아가 취지를 설명하고, 홍보물 샘플을 함께 확인하며 조건을 맞췄습니다. 홍보물 디자인도 맡았습니다.</p></li>
+          <li class="end reveal"><span class="stop">달라진 것</span><p>협찬을 유치해 공연을 이어갔고, 연출부장으로 일한 기간에 신입 지원자가 전년보다 2배 늘었습니다.</p></li>
+        </ol>
+        <div class="gallery reveal" data-title="한소리 공연 포스터">
+          <button class="tile mock" type="button"><img src="img/band-poster1.webp" alt="한소리 공연 포스터, 하단에 협찬 상점 로고"></button>
+          <button class="tile mock" type="button"><img src="img/band-poster2.webp" alt="한소리 School of Hansori 공연 포스터"></button>
+          <p class="cap">제가 디자인한 공연 포스터. 하단에 협찬 상점이 들어갑니다.</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Work</p>
+      <h2>실무 경력</h2>
+    </div>
+    <div class="jobs">
+      <div class="job reveal">
+        <div class="when">2026.05 – 재직 중</div>
+        <div>
+          <h3>PTKOREA</h3>
+          <p class="role">글로벌 캠페인 이커머스 인턴 · D2-GXG-Team6</p>
+          <ul>
+            <li>40개국 이상 삼성전자 Shop App·캠페인 페이지 CMS 퍼블리싱과 QA</li>
+            <li>신제품 글로벌 런칭에서 중동·북아프리카 6개국 8개 사이트 담당. 국가별 노출 일정, 언어, 콘텐츠 조건을 나눠 관리</li>
+            <li>해외 담당자와 Jira로 영어 소통, 인도 개발팀 개발콜에 참여해 이슈를 반영까지 추적</li>
+            <li>광고주 가이드·스펙 기준으로 구현 상태와 디자인팀 제작 에셋을 확인. 오류가 나면 원인과 담당을 나눠 처리</li>
+          </ul>
+          <div class="phases">
+            <div class="phase"><b>PRE-LIVE</b>국가별 조건과 수정 사항을 라이브 전에 정리하고 가이드·스펙 기준으로 점검</div>
+            <div class="phase"><b>LIVE</b>변경 요청을 바로 반영하고, 이슈는 Jira로 유관 담당자에게 전달</div>
+            <div class="phase"><b>POST-LIVE</b>노출 누락·랜딩 오류 등 후속 문제를 재확인하고 다음 운영 기준으로 정리</div>
+          </div>
+          <div class="chips"><span class="chip">Mother's Day</span><span class="chip">Back to School</span><span class="chip">Samsung WEEK</span><span class="chip">Galaxy S26 FE</span><span class="chip">Jira</span><span class="chip">CMS</span></div>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">2025.10 – 2025.12</div>
+        <div>
+          <h3>김종학프로덕션</h3>
+          <p class="role">기획 PD 인턴 · 콘텐츠제작본부</p>
+          <ul>
+            <li>원작 IP 검토와 드라마 기획 제안서 2건 작성</li>
+            <li>이해관계자 의견을 모아 전달안으로 정리</li>
+          </ul>
+        </div>
+      </div>
+      <div class="job reveal">
+        <div class="when">2023.10 – 2024.02</div>
+        <div>
+          <h3>리플레인</h3>
+          <p class="role">이커머스 AMD 인턴 · 마케팅팀</p>
+          <ul>
+            <li>SSF SHOP, 29CM, W CONCEPT 등 외부몰 7개와 자사몰의 상품·주문·재고 운영</li>
+            <li>외부몰 기획전의 쿠폰·할인 혜택과 자사몰 혜택 조정, 채널별 수수료와 마진 기준으로 프로모션 우선순위 판단</li>
+            <li>시즌·룩북 관련 디자인팀 회의 참여, 브랜드 SNS 콘텐츠 제작</li>
+          </ul>
+          <div class="chips"><span class="chip">Sabangnet</span><span class="chip">ECount</span><span class="chip">Cafe24</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="travel">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Travel</p>
+      <h2>여행은 시트 한 장으로 설계합니다</h2>
+      <p>독일 방문학생 때부터 여행마다 일정·이동편·숙소·정산을 한 파일에 묶어 왔습니다. 2023년부터 만든 시트가 10개입니다. 모인 글로벌프렌즈 12기 콘텐츠팀에서 이 틀을 템플릿으로 배포했습니다.</p>
+    </div>
+    <div class="travel-head reveal">
+      <div class="moin-result"><span class="eyebrow">모인 글로벌프렌즈 12기 · 2023.03–07</span><p class="big-num">조회 2,541 · 댓글 186</p><p>여행 계획·정산 엑셀 배포글 기록. 해외송금·환전·여행 준비 콘텐츠 15건을 만들었고 VIC 우수활동자로 선정됐습니다.</p></div>
+      <div class="gallery" data-title="모인 글로벌프렌즈"><button class="tile" type="button"><img src="img/moin-excel-cover.jpg" alt="카드뉴스 「독일 교환/방문 학생을 위한 여행 계획 세우기 꿀팁.excel」"></button><button class="tile mock" type="button"><img src="img/moin.jpg" alt="모인 글로벌프렌즈 12기 콘텐츠팀 VIC 선정 화면"></button></div>
+    </div>
+
+    <div class="found reveal">
+      <h3>정보가 없던 곳에서 먼저 길을 찾고, 다음 사람을 위해 남겼습니다</h3>
+      <ol class="found-list"><li><span class="when">2023.03</span><div><b>베를린 공항에서 기숙사가 있는 프랑크푸르트(오더)로 가는 길</b><p>도시 외곽이라 검색해도 정보가 없었습니다. 지나가는 사람들에게 묻고 또 물어 기차표를 샀습니다.</p><a class="post" href="https://blog.naver.com/jiwon3289/223131321000" target="_blank" rel="noopener">→ 독일 교통 앱 총정리 (DB Navigator · VBB 등) ↗</a></div></li><li><span class="when">2023.03</span><div><b>입국 항공편 KLM</b><p>수하물 이슈가 있다는 얘기를 듣고 후기를 찾았지만 없어서 그냥 출국했습니다.</p><a class="post" href="https://blog.naver.com/jiwon3289/223144970827" target="_blank" rel="noopener">→ KLM 네덜란드 항공 탑승 후기 ↗</a></div></li><li><span class="when">2023.03</span><div><b>출발 6일 전에 계획한 첫 유럽 여행, 런던</b><p>항공·숙소·장소가 흩어져 있어 엑셀로 묶었습니다. 써 보면서 「시간보다 순서에 초점을 맞추라」는 기준을 얻었습니다.</p><a class="post" href="https://blog.naver.com/jiwon3289/223080944440" target="_blank" rel="noopener">→ 여행 계획·정산 엑셀 템플릿 공유 ↗</a></div></li><li><span class="when">2023.04</span><div><b>독일 출국 짐 싸기</b><p>실제로 들고 간 목록과, 살아 보니 안 챙겨도 됐던 물건을 나눴습니다.</p><a class="post" href="https://blog.naver.com/jiwon3289/223077737963" target="_blank" rel="noopener">→ 짐 싸기 체크리스트 엑셀 공유 ↗</a></div></li></ol>
+      <p class="found-note">모두 모인 글로벌프렌즈 12기 활동으로 쓴 블로그 글입니다.</p>
+    </div>
+
+    <div class="sheet reveal" id="sheet" style="margin-top:40px">
+      <div class="sheet-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><b>스페인-모로코 여행.xlsx</b><span class="sheet-note">2023.05 실제 시트 · 일부 발췌</span></div>
+      <div class="sheet-body">
+        <div class="sheet-pane" data-pane="0" hidden>
+          <div class="sheet-split">
+            <div class="xl"><table><thead><tr><th class="corner">시간</th><th>05.09 (화) 세비야</th><th>05.11 (목) 그라나다</th></tr></thead><tbody><tr><th>07:00</th><td>아침 먹고 준비</td><td>아침 준비</td></tr><tr><th>08:00</th><td></td><td>알람브라</td></tr><tr><th>09:00</th><td>세비야 미술관</td><td></td></tr><tr><th>10:00</th><td>살바도르 성당</td><td>알람브라 궁전</td></tr><tr><th>11:00</th><td>점심</td><td></td></tr><tr><th>12:00</th><td></td><td>점심 (누에바 광장 · 재래시장)</td></tr><tr><th>12:30</th><td>세비야 대성당 (히랄다 탑)</td><td></td></tr><tr><th>13:30</th><td></td><td>그라나다 대성당</td></tr><tr><th>15:00</th><td>알카사르 궁전</td><td>광장시장 둘러보기</td></tr><tr><th>16:30</th><td>에스파냐 광장</td><td></td></tr><tr><th>17:30</th><td>플라멩코 공연</td><td></td></tr><tr><th>18:00</th><td></td><td>그라나다 → 말라가 버스</td></tr><tr><th>19:00</th><td>강가 주변 노을, 저녁</td><td></td></tr><tr><th>20:30</th><td></td><td>숙소 짐 풀기</td></tr><tr><th>21:30</th><td>메트로폴 파라솔</td><td>말라가 저녁</td></tr></tbody></table></div>
+            <div class="xl"><table><thead><tr><th colspan="3" class="hl">갈 장소</th></tr><tr><th>위치</th><th>이름</th><th>V</th></tr></thead><tbody><tr><td>세비야</td><td>세비야 대성당</td><td class="chk">V</td></tr><tr><td>세비야</td><td>플라멩코</td><td class="chk"></td></tr><tr><td>세비야</td><td>메트로폴 파라솔</td><td class="chk"></td></tr><tr><td>마드리드</td><td>프라도 국립미술관</td><td class="chk"></td></tr><tr><td>마드리드</td><td>레티로 공원</td><td class="chk"></td></tr><tr><td>마드리드</td><td>산 미겔 시장</td><td class="chk"></td></tr></tbody></table></div>
+          </div>
+        </div>
+        <div class="sheet-pane" data-pane="1">
+          <div class="xl"><table><thead><tr><th>구간</th><th>날짜</th><th>시간</th><th>가격</th><th>수화물 규정</th><th>항공사·교통편</th><th>기타</th></tr></thead><tbody><tr><td>베를린 → 마드리드</td><td>05.06</td><td>11:30–14:45 · 3h15m</td><td>€60.81</td><td>기내 56×40×25, 10kg</td><td>이베리아 익스프레스</td><td>best</td></tr><tr><td>세비야 → 그라나다</td><td>05.10</td><td>13:00–16:00</td><td>€16.90</td><td></td><td>알사 버스</td><td></td></tr><tr><td>그라나다 → 말라가</td><td>05.11</td><td>18:00–19:45</td><td>€9.19</td><td></td><td>알사 버스</td><td></td></tr><tr><td>말라가 → 마라케시</td><td>05.13</td><td>20:55–21:25 · 1h30m</td><td>€32.49</td><td>기내 55×40×20, 10kg</td><td>라이언에어</td><td>시간이 좀 늦음</td></tr></tbody></table></div>
+        </div>
+        <div class="sheet-pane" data-pane="2" hidden>
+          <div class="xl"><table><thead><tr><th>숙소명</th><th>위치 (공항–숙소 교통)</th><th>체크인</th><th>체크아웃</th><th>결제 여부</th></tr></thead><tbody><tr><td>마드리드 호스텔</td><td>마드리드</td><td>05.06</td><td>05.08</td><td></td></tr><tr><td>세비야 숙소</td><td>세비야 북부 · 주요 지점까지 도보 40분</td><td>05.08</td><td>05.10</td><td></td></tr><tr><td>그라나다 숙소</td><td>그라나다</td><td>05.10</td><td>05.11</td><td></td></tr><tr><td>말라가 숙소</td><td>말라가</td><td>05.11</td><td>05.13</td><td></td></tr><tr><td>마라케시 숙소</td><td>마라케시 메나라 공항 근처</td><td>05.13</td><td>05.15</td><td></td></tr></tbody></table></div>
+        </div>
+        <div class="sheet-pane" data-pane="3" hidden>
+          <div class="xl"><table class="pay"><tbody><tr><th>날짜</th><th>05.06</th><th>05.07</th><th>05.08</th><th>05.09</th><th>05.10</th><th>05.11</th></tr><tr><th>식비</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>문화생활</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>교통비</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><th>기타 비용</th><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr class="sum"><th>총금액</th><td>€0</td><td>€0</td><td>€0</td><td>€0</td><td>€0</td><td>€0</td></tr></tbody></table></div>
+          <p class="sheet-tip">날짜별·항목별로 쓴 돈을 적으면 여행 총액이 자동으로 합산됩니다. 통화는 시트마다 고를 수 있게 했습니다.</p>
+        </div>
+      </div>
+      <div class="sheet-tabs" role="tablist" aria-label="시트 탭">
+        <button type="button" role="tab" aria-selected="false" data-tab="0">스페인 (시간표)</button>
+        <button type="button" role="tab" aria-selected="true" data-tab="1">이동편</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="2">숙소</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="3">정산 (전체)</button>
+      </div>
+    </div>
+
+
+    <ul class="trips reveal"><li><span class="when">2023.03–08</span><div><b>독일 방문학생 중 유럽 여행</b><p>첫 여행 런던(2023.03.25–30)부터 모로코 사하라 사막 투어까지. 영국 · 스페인·모로코 · 벨기에·네덜란드 · 오스트리아 · 폴란드 · 스위스 · 체코·헝가리·크로아티아 · 이탈리아·프랑스·독일</p></div><span class="tag-s">시트 8개</span></li><li><span class="when">2025.05</span><div><b>일본 오사카 · 교토</b></div><span class="tag-s">시트 1개</span></li><li><span class="when">2025.07</span><div><b>베트남</b></div></li><li><span class="when">2025.12–2026.01</span><div><b>프랑스 스트라스부르 · 근교 독일 · 스위스</b><p>친구 가족 집에 머물며 그 가족이 크리스마스와 새해를 보내는 방식을 함께 지냈습니다.</p></div><span class="tag-s">현지 가정</span></li><li><span class="when">2026.02</span><div><b>호주 멜버른 한 달 살기</b><p>한국인과 서로 집을 바꿔 쉐어하우스에 살아 봤습니다. 서핑 투어와 바다사자·해마와 함께하는 스노클링 투어도 해 봤습니다. 매일 수영장 사우나에서 마주친 현지 할아버지와 친해져 친구와 셋이 필립 아일랜드로 1박 2일 여행을 갔고, 지금도 가끔 연락합니다.</p><div class="trip-pics" data-title="멜버른 · 필립 아일랜드"><button class="tile" type="button"><img src="img/mel-nobbies.jpg" alt="필립 아일랜드 노비스 전망대를 걷는 할아버지와 친구" loading="lazy"></button><button class="tile" type="button"><img src="img/mel-together.jpg" alt="필립 아일랜드 해변에서 할아버지와 함께" loading="lazy"></button></div></div><span class="tag-s">홈 스왑</span></li><li><span class="when">2026.05</span><div><b>홍콩 · 심천 · 마카오 5박 6일</b><p>날짜별 시간표에 「🔴 필수 예약」 칸을 따로 두고, 심천 날에는 WeChat · Pony.ai · 美团 앱 설치를 먼저 적어 두었습니다. 로보택시와 드론 배달을 현지에서 바로 쓰기 위해서였습니다.</p></div><span class="tag-s">상세일정표</span></li></ul>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">More</p>
+      <h2>그 밖의 프로젝트</h2>
+    </div>
+    <div class="more">
+      <article class="reveal">
+        <div class="pics one" data-title="장염 건강정보 웹사이트"><button class="tile mock" type="button"><img src="img/ai-health.jpg" alt="장염 식단 정보 웹사이트 화면" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>장염 환자를 위한 건강정보 웹사이트</h3>
+          <p class="where">개인 프로젝트 · AI 에이전트 · 웹</p>
+          <p>장염을 겪은 친구가 먹어도 되는 음식과 안 되는 음식을 매번 따로 검색하는 불편을 보고, 필요한 정보를 한 페이지에 정리한 웹사이트를 만들었습니다. 확인 순서와 정보 배치를 쓰는 사람 입장에서 짰고, Codex와 Claude Code를 함께 써서 건강정보를 정리하는 에이전트 구조를 설계했습니다.</p>
+        </div>
+      </article>
+      <article class="reveal">
+        <div class="pics" data-title="차란 서비스 전략"><button class="tile" type="button"><img src="img/charan-1.jpg" alt="차란 시장 내 경쟁사 분석 슬라이드" loading="lazy"></button><button class="tile" type="button"><img src="img/charan-2.jpg" alt="차란 리브랜딩 발표 표지" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>세컨핸드 패션 앱 ‘차란’ 서비스 전략</h3>
+          <p class="where">서비스마케팅 수업 팀프로젝트</p>
+          <p>구매자는 가격과 정품 보증을, 판매자는 편리성과 수익성을 본다는 차이에서 출발했습니다. 크림·솔드아웃·후루츠패밀리와 비교해 검색 기능과 SNS 인지도를 과제로 뽑고, 구매 전·이용·사후 접점별 전략을 제안했습니다.</p>
+        </div>
+      </article>
+      <article class="reveal">
+        <div class="pics" data-title="코닥 어패럴 상품기획" data-extra="img/kodak-p13.jpg|설문조사 분석;img/kodak-p16.jpg|STP 전략;img/kodak-p18.jpg|페르소나;img/kodak-p23.jpg|Place 전략 · 굿즈;img/kodak-p25.jpg|Promotion 전략 · 중화권 채널;img/kodak-p27.jpg|컨셉 보드;img/kodak-p29.jpg|디자인 1 · 도식화;img/kodak-p35.jpg|작업지시서"><button class="tile" type="button"><img src="img/kodak-p01.jpg" alt="코닥 어패럴 기획서 표지" loading="lazy"></button><button class="tile" type="button"><img src="img/kodak-p28.jpg" alt="디자인 일러스트레이션" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>코닥 어패럴 중화권 진출 상품기획</h3>
+          <p class="where">한국의류학회 패션상품기획콘테스트 · 4인 팀 팀장 · 2024.04–10</p>
+          <p>경쟁 브랜드 16개의 포지셔닝을 분석하고 한국·중화권 20대 설문을 진행해, 핵심 타깃을 중화권 Gen Z로 다시 잡았습니다. STP·4P 기반 40쪽 기획서를 총괄했습니다.</p>
+          <p class="award">본선 진출 · 입선</p>
+        </div>
+      </article>
+      <article class="reveal">
+        <div class="pics" data-title="LMC 매장 VMD" data-extra="img/lmc-p01.jpg|Interior · 인테리어 콘셉트;img/lmc-p02.jpg|Rendering · 렌더링 매장 뷰;img/lmc-p03.jpg|Design Point · 외관 브랜딩;img/lmc-p04.jpg|Design Point · 포컬 포인트와 디스플레이;img/lmc-p05.jpg|Design Point · 프로모션 존과 기능 존;img/lmc-p06.jpg|Panorama · 전체 콘셉트;img/lmc-p07.jpg|Exterior · 외관"><button class="tile" type="button"><img src="img/lmc-2.jpg" alt="LMC 매장 내부 3D 렌더링" loading="lazy"></button><button class="tile" type="button"><img src="img/lmc-ext.jpg" alt="LMC 매장 외관 SketchUp 모델" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>LMC 매장 VMD 리브랜딩</h3>
+          <p class="where">VMD 수업 팀프로젝트 · 팀장</p>
+          <p>스케이트보드·서브컬처 정체성을 공간으로 옮기고, 커스터마이징 존과 그래피티 이벤트로 매장 방문 자체가 브랜드 경험이 되도록 설계했습니다. SketchUp으로 3D 구현까지 했습니다.</p>
+          <p class="award">A+ · 우수 팀프로젝트 선정</p>
+        </div>
+      </article>
+      <article class="reveal">
+        <div class="pics" data-title="Symbiotic Dots"><button class="tile" type="button"><img src="img/dtp-shirt.jpg" alt="Symbiotic Dots 패턴 셔츠" loading="lazy"></button><button class="tile" type="button"><img src="img/dtp-tie.jpg" alt="Symbiotic Dots 패턴 넥타이" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>Symbiotic Dots 디지털 텍스타일</h3>
+          <p class="where">한국패션비즈니스학회 · 2024.09–12</p>
+          <p>셔츠와 넥타이 패턴을 디자인하고 DTP 원단 출력 공정에서 생산자와 소통하며 실물 의류로 만들었습니다.</p>
+          <p class="award">Sustainable Digital Textile Printing Awards 입선</p>
+        </div>
+      </article>
+      <article class="reveal">
+        <div class="pics" data-title="FC콕 축구동아리"><button class="tile" type="button"><img src="img/fc-2.jpg" alt="FC콕 대회 현수막과 함께" loading="lazy"></button><button class="tile" type="button"><img src="img/fc-1.jpg" alt="FC콕 경기 중 모습" loading="lazy"></button></div>
+        <div class="txt">
+          <h3>FC콕 축구동아리</h3>
+          <p class="where">센터백 · 2024.09–2025.08</p>
+          <p>초심자가 경기에 끼기 어려운 문제를 보고 풋살과 친선경기를 늘려 실력별로 참여할 기회를 만들자고 제안했습니다. 동아리 홍보 릴스도 만들었습니다.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Proposal</p>
+      <h2>입사 후 제안</h2>
+    </div>
+    <div class="ticket reveal">
+      <div class="main">
+        <p class="ticket-label">마이리얼트립에서 도전하고 싶은 과제</p>
+        <h3>마이리얼트립을 예약할 때만 여는 앱에서, 여행을 준비하는 내내 여는 앱으로 넓히고 싶습니다.</h3>
+
+        <h4>제가 겪은 일</h4>
+        <p>항공권과 숙소는 앱에서 예약했지만, 여행 준비는 그때부터 시작이었습니다. 예약한 비행기와 숙소를 날짜별 일정에 맞춰 넣고, 가고 싶은 곳을 동선대로 배치하고, 아직 하지 않은 예약을 챙기고, 여행 중에 쓴 돈을 정리하는 일은 모두 엑셀에서 했습니다. 2023년부터 여행마다 이런 시트를 만들어 지금까지 10개가 됐습니다.</p>
+
+        <h4>저만 겪는 일이 아니었습니다</h4>
+        <p>이 시트를 템플릿으로 정리해 블로그에 공유했더니 조회 2,541회, 댓글 186개가 달렸습니다. 예약을 마친 뒤의 준비를 손으로 하고 있는 여행자가 많다는 뜻으로 받아들였습니다.</p>
+
+        <h4>지금의 마이리얼트립</h4>
+        <p>항공부터 숙소, 투어까지 한 앱에서 예약할 수 있지만, 예약이 끝나면 앱을 열 이유가 줄어듭니다. 「내여행」에는 예약 내역과 다녀온 도시 컬렉션이 모여 있고, 예약들을 하나의 일정으로 엮는 일은 여전히 앱 밖에서 일어납니다. 여행자가 일정을 마이리얼트립 안에서 짜게 되면, 일정 사이 빈 시간에 맞는 투어나 이동편을 바로 그 자리에서 제안할 수 있습니다. 예약 플랫폼이 여행 준비의 출발점이 되는 것입니다.</p>
+
+        <h4>입사하면 이렇게 풀어 보겠습니다</h4>
+        <ol class="plan">
+          <li>예약을 마친 고객이 출발 전에 앱 밖에서 어떤 준비를 하는지부터 확인하겠습니다.</li>
+          <li>예약한 항공과 숙소가 날짜별 일정으로 정리되고, 빈 시간과 남은 준비가 한눈에 보이는 작은 화면부터 만들어 보겠습니다.</li>
+          <li>출발 전에 앱을 다시 여는 고객이 늘었는지, 그 화면에서 이어진 추가 예약이 있는지로 결과를 확인하겠습니다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<section class="appendix print-only">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow">Appendix</p><h2>프로젝트 자료</h2></div>
+    <div class="appendix-group"><h3>스티치부티크</h3><div class="appendix-grid"><figure><img src="img/stitch-logo.jpg" alt="스티치부티크 로고"><figcaption>스티치부티크 로고</figcaption></figure><figure><img src="img/stitch-item-1.jpg" alt="스티치부티크 상품 디자인 1"><figcaption>스티치부티크 상품 디자인 1</figcaption></figure><figure><img src="img/stitch-item-2.jpg" alt="스티치부티크 상품 디자인 2"><figcaption>스티치부티크 상품 디자인 2</figcaption></figure><figure><img src="img/stitch-item-3.jpg" alt="스티치부티크 상품 디자인 3"><figcaption>스티치부티크 상품 디자인 3</figcaption></figure><figure><img src="img/stitch-item-4.jpg" alt="스티치부티크 홍보 카드"><figcaption>스티치부티크 홍보 카드</figcaption></figure></div></div><div class="appendix-group"><h3>코닥 어패럴 상품기획</h3><div class="appendix-grid"><figure><img src="img/kodak-p13.jpg" alt="설문조사 분석"><figcaption>설문조사 분석</figcaption></figure><figure><img src="img/kodak-p16.jpg" alt="STP 전략"><figcaption>STP 전략</figcaption></figure><figure><img src="img/kodak-p18.jpg" alt="페르소나"><figcaption>페르소나</figcaption></figure><figure><img src="img/kodak-p23.jpg" alt="Place 전략 · 굿즈"><figcaption>Place 전략 · 굿즈</figcaption></figure><figure><img src="img/kodak-p25.jpg" alt="Promotion 전략 · 중화권 채널"><figcaption>Promotion 전략 · 중화권 채널</figcaption></figure><figure><img src="img/kodak-p27.jpg" alt="컨셉 보드"><figcaption>컨셉 보드</figcaption></figure><figure><img src="img/kodak-p29.jpg" alt="디자인 1 · 도식화"><figcaption>디자인 1 · 도식화</figcaption></figure><figure><img src="img/kodak-p35.jpg" alt="작업지시서"><figcaption>작업지시서</figcaption></figure></div></div><div class="appendix-group"><h3>LMC 매장 VMD</h3><div class="appendix-grid"><figure><img src="img/lmc-p01.jpg" alt="Interior · 인테리어 콘셉트"><figcaption>Interior · 인테리어 콘셉트</figcaption></figure><figure><img src="img/lmc-p02.jpg" alt="Rendering · 렌더링 매장 뷰"><figcaption>Rendering · 렌더링 매장 뷰</figcaption></figure><figure><img src="img/lmc-p03.jpg" alt="Design Point · 외관 브랜딩"><figcaption>Design Point · 외관 브랜딩</figcaption></figure><figure><img src="img/lmc-p04.jpg" alt="Design Point · 포컬 포인트와 디스플레이"><figcaption>Design Point · 포컬 포인트와 디스플레이</figcaption></figure><figure><img src="img/lmc-p05.jpg" alt="Design Point · 프로모션 존과 기능 존"><figcaption>Design Point · 프로모션 존과 기능 존</figcaption></figure><figure><img src="img/lmc-p06.jpg" alt="Panorama · 전체 콘셉트"><figcaption>Panorama · 전체 콘셉트</figcaption></figure><figure><img src="img/lmc-p07.jpg" alt="Exterior · 외관"><figcaption>Exterior · 외관</figcaption></figure></div></div>
+  </div>
+</section>
+<section class="closing" id="thanks">
+  <div class="wrap">
+    <p class="closing-eyebrow">THANK YOU</p>
+    <h2>작은 불편을 그냥 지나치지 않는 여행자의 눈으로,<br>마이리얼트립의 다음 여행을 함께 만들고 싶습니다.</h2>
+    <p class="closing-text">끝까지 읽어 주셔서 감사합니다.<br>함께 일할 기회를 기다리겠습니다.</p>
+    <div class="closing-contact">
+      <div><span>CONTACT</span><b>easywon0430@gmail.com</b></div>
+      <div><span>LINKEDIN</span><a href="https://www.linkedin.com/in/jiwon0430/" target="_blank" rel="noopener">linkedin.com/in/jiwon0430 ↗</a></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">이지원 포트폴리오 · 2026.10</div>
+</footer>
+
+<button class="totop" id="totop" type="button" aria-label="맨 위로">↑</button>
+
+<dialog class="lb" id="lb" aria-label="사진 크게 보기">
+  <div class="lb-top"><b id="lbTitle"></b><span id="lbCount"></span><button type="button" id="lbClose" aria-label="닫기">✕</button></div>
+  <div class="lb-stage">
+    <button type="button" class="lb-nav prev" id="lbPrev" aria-label="이전 사진">‹</button>
+    <img id="lbImg" src="img/photo.jpg" alt="">
+    <button type="button" class="lb-nav next" id="lbNext" aria-label="다음 사진">›</button>
+  </div>
+  <p id="lbCap"></p>
+  <div class="lb-thumbs" id="lbThumbs"></div>
+</dialog>
+
+<script>
+(function () {
+  var bar = document.getElementById('progress');
+  var top = document.getElementById('totop');
+  function onScroll() {
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max > 0 ? h.scrollTop / max : 0;
+    bar.style.transform = 'scaleX(' + p + ')';
+    top.classList.toggle('show', h.scrollTop > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // active nav pill
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navlist a'));
+  if ('IntersectionObserver' in window) {
+    var map = {};
+    links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && map[e.target.id]) {
+          links.forEach(function (a) { a.classList.remove('on'); });
+          map[e.target.id].classList.add('on');
+          var ul = document.getElementById('navlist'), a = map[e.target.id];
+          if (ul.scrollWidth > ul.clientWidth) ul.scrollLeft = a.offsetLeft - (ul.clientWidth - a.offsetWidth) / 2;
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
+  }
+
+  // lightbox: every photo in a project opens as one browsable set
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+  var lbTitle = document.getElementById('lbTitle'), lbCount = document.getElementById('lbCount'), lbThumbs = document.getElementById('lbThumbs');
+  var prevB = document.getElementById('lbPrev'), nextB = document.getElementById('lbNext');
+  var set = [], cur = 0;
+  function groupOf(el) {
+    var tiles = Array.prototype.slice.call(el.querySelectorAll('.tile img')).map(function (i) { return { src: i.getAttribute('src'), alt: i.alt }; });
+    var extra = (el.getAttribute('data-extra') || '').split(';').filter(Boolean).map(function (x) { var p = x.split('|'); return { src: p[0], alt: p[1] || '' }; });
+    return tiles.concat(extra);
+  }
+  function show(i) {
+    cur = (i + set.length) % set.length;
+    lbImg.src = set[cur].src; lbImg.alt = set[cur].alt; lbCap.textContent = set[cur].alt;
+    lbCount.textContent = set.length > 1 ? (cur + 1) + ' / ' + set.length : '';
+    prevB.hidden = nextB.hidden = set.length < 2;
+    Array.prototype.forEach.call(lbThumbs.children, function (b, k) { b.classList.toggle('on', k === cur); });
+    var on = lbThumbs.children[cur];
+    if (on) lbThumbs.scrollLeft = on.offsetLeft - (lbThumbs.clientWidth - on.offsetWidth) / 2;
+  }
+  document.querySelectorAll('[data-title]').forEach(function (g) {
+    var items = groupOf(g);
+    var first = g.querySelector('.tile');
+    if (first && items.length > 1) {
+      var c = document.createElement('span'); c.className = 'count'; c.textContent = '사진 ' + items.length + '장'; first.appendChild(c);
+    }
+    g.querySelectorAll('.tile').forEach(function (t, idx) {
+      t.addEventListener('click', function () {
+        set = items; lbTitle.textContent = g.getAttribute('data-title');
+        lbThumbs.innerHTML = '';
+        if (set.length > 1) set.forEach(function (it, k) {
+          var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', (k + 1) + '번째 사진');
+          var im = document.createElement('img'); im.src = it.src; im.alt = ''; b.appendChild(im);
+          b.addEventListener('click', function () { show(k); }); lbThumbs.appendChild(b);
+        });
+        if (lb.showModal) lb.showModal();
+        show(idx);
+      });
+    });
+  });
+  prevB.addEventListener('click', function () { show(cur - 1); });
+  nextB.addEventListener('click', function () { show(cur + 1); });
+  lb.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(cur - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(cur + 1); }
+  });
+  var sx = null;
+  lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (sx === null || set.length < 2) return;
+    var dx = e.changedTouches[0].clientX - sx; sx = null;
+    if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
+  });
+  document.getElementById('lbClose').addEventListener('click', function () { lb.close(); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+
+
+  // sheet tabs
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.sheet-tabs button'));
+  var panes = Array.prototype.slice.call(document.querySelectorAll('.sheet-pane'));
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-tab');
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      panes.forEach(function (pn) { pn.hidden = pn.getAttribute('data-pane') !== k; });
+    });
+  });
+
+  // copy email
+  var mail = document.getElementById('copyMail');
+  mail.addEventListener('click', function () {
+    var txt = 'easywon0430@gmail.com';
+    function done() { mail.textContent = '복사했습니다'; setTimeout(function () { mail.textContent = txt; }, 1600); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done, function () { selectText(); });
+    } else { selectText(); }
+    function selectText() { var r = document.createRange(); r.selectNodeContents(mail); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+  });
+})();
+</script>
+
+</body>
+</html>
